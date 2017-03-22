@@ -7,7 +7,8 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jin.controller.DisciplineController;
 import com.jin.controller.StudentController;
-import com.jin.domain.BusinessEntity;
+import com.jin.data.jpa.domain.BusinessEntity;
+import com.jin.data.jpa.resource.BusinessResource;
 import com.jin.domain.Discipline;
 import com.jin.domain.Student;
 

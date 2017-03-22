@@ -1,4 +1,4 @@
-package com.jin.resource;
+package com.jin.data.jpa.resource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Controller;
 
-import com.jin.domain.BusinessEntity;
+import com.jin.data.jpa.domain.BusinessEntity;
 
 public class BusinessResourceAssembler<E extends BusinessEntity<?> ,R extends BusinessResource<E>, C extends Controller> extends ResourceAssemblerSupport<E,R>{
 

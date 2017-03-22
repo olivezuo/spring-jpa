@@ -4,18 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.HateoasPageableHandlerMethodArgumentResolver;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedResources;
 import org.springframework.stereotype.Service;
 
 import com.jin.controller.DisciplineController;
+import com.jin.data.jpa.resource.BusinessResourceAssembler;
+import com.jin.data.jpa.service.BusinessResourceService;
 import com.jin.domain.Discipline;
-import com.jin.resource.BusinessResourceAssembler;
 import com.jin.resource.DisciplineResource;
 
 @Service
-public class DisciplineResourceServiceImpl implements DisciplineResourceService {
+public class DisciplineResourceServiceImpl extends BusinessResourceService implements DisciplineResourceService {
 
 	@Autowired
 	DisciplineService disciplineService;
@@ -24,10 +24,7 @@ public class DisciplineResourceServiceImpl implements DisciplineResourceService 
 	public BusinessResourceAssembler disciplineResourcesAssembler(){
 		return new BusinessResourceAssembler(DisciplineController.class, DisciplineResource.class);
 	}
-	
-	@Autowired
-	HateoasPageableHandlerMethodArgumentResolver resolver;
-	
+		
 	@Override
 	public DisciplineResource<Discipline> findDiscipline(Long id) {
 		Discipline discipline = disciplineService.findDiscipline(id);

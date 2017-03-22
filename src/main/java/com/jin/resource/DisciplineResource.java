@@ -4,7 +4,8 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jin.controller.StudentController;
-import com.jin.domain.BusinessEntity;
+import com.jin.data.jpa.domain.BusinessEntity;
+import com.jin.data.jpa.resource.BusinessResource;
 
 public class DisciplineResource<E extends BusinessEntity<?>> extends BusinessResource<E> {
 

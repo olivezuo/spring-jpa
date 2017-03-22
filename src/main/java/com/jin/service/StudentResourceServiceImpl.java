@@ -4,21 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.HateoasPageableHandlerMethodArgumentResolver;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedResources;
-import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 
 import com.jin.controller.StudentController;
-import com.jin.domain.BusinessEntity;
+import com.jin.data.jpa.resource.BusinessResourceAssembler;
+import com.jin.data.jpa.service.BusinessResourceService;
 import com.jin.domain.Student;
-import com.jin.resource.BusinessResource;
-import com.jin.resource.BusinessResourceAssembler;
 import com.jin.resource.StudentResource;
 
 @Service
-public class StudentResourceServiceImpl<E extends BusinessEntity<?> ,R extends BusinessResource<E>, C extends Controller> implements StudentResourceService {
+public class StudentResourceServiceImpl extends BusinessResourceService implements StudentResourceService {
 
 	@Autowired
 	StudentService studentService;
@@ -27,9 +24,6 @@ public class StudentResourceServiceImpl<E extends BusinessEntity<?> ,R extends B
 	public BusinessResourceAssembler studentResourcesAssembler(){
 		return new BusinessResourceAssembler(StudentController.class, StudentResource.class);
 	}
-	
-	@Autowired
-	HateoasPageableHandlerMethodArgumentResolver resolver;
 	
 	@Override
 	public StudentResource<Student> findStudent(Long id) {

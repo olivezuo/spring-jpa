@@ -1,8 +1,8 @@
-package com.jin.resource;
+package com.jin.data.jpa.resource;
 
 import org.springframework.hateoas.ResourceSupport;
 
-import com.jin.domain.BusinessEntity;
+import com.jin.data.jpa.domain.BusinessEntity;
 
 abstract public class BusinessResource<E extends BusinessEntity<?>> extends ResourceSupport {
 	protected E entity;
