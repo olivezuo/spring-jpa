@@ -29,7 +29,9 @@ import com.jin.data.jpa.domain.BusinessEntity;
 @Table(name = "discipline")
 public class Discipline implements BusinessEntity<Long> {
 
-	
+	private static final long serialVersionUID = 3565372490276261679L;
+
+
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)

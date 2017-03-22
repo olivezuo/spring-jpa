@@ -1,5 +1,7 @@
 package com.jin.data.jpa.domain;
 
-public interface BusinessEntity<T> {
+import java.io.Serializable;
+
+public interface BusinessEntity<T> extends Serializable{
 	public T getId(); 
 }

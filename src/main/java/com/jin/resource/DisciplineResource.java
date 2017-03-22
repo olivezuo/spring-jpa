@@ -18,8 +18,7 @@ public class DisciplineResource<E extends BusinessEntity<?>> extends BusinessRes
 	
 	public DisciplineResource(E discipline){
 		super(discipline);
-		build();
-		
+		build();		
 	}
 	
 	@Override
