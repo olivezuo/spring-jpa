@@ -45,7 +45,7 @@ public class DisciplineResourceServiceImpl extends BusinessResourceService imple
 		Page<Discipline> disciplines = disciplineService.findAllDiscipline(pageable);
 		
 		PagedResourcesAssembler<Discipline> assembler = new PagedResourcesAssembler<Discipline>(resolver, null); 
-		PagedResources<DisciplineResource<Discipline>> disciplineResources = assembler.toResource(disciplines, disciplineResourcesAssembler());		
+		PagedResources<DisciplineResource<Discipline>> disciplineResources = assembler.toResource(disciplines, disciplineResourcesAssembler());
 		
 		return disciplineResources;
 	}

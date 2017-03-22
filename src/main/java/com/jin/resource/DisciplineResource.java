@@ -2,11 +2,14 @@ package com.jin.resource;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
+import org.springframework.hateoas.core.Relation;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jin.controller.StudentController;
 import com.jin.data.jpa.domain.BusinessEntity;
 import com.jin.data.jpa.resource.BusinessResource;
 
+@Relation(collectionRelation = "disciplines")
 public class DisciplineResource<E extends BusinessEntity<?>> extends BusinessResource<E> {
 
 	public DisciplineResource(){
@@ -15,7 +18,8 @@ public class DisciplineResource<E extends BusinessEntity<?>> extends BusinessRes
 	
 	public DisciplineResource(E discipline){
 		super(discipline);
-		this.add(linkTo(StudentController.class).slash("disciplines").slash(discipline.getId()).withSelfRel());
+		build();
+		
 	}
 	
 	@Override
@@ -24,12 +28,12 @@ public class DisciplineResource<E extends BusinessEntity<?>> extends BusinessRes
 		return this.entity;
 	}
 
-	@Override
-	public void setEntity(E discipline) {
-		this.entity =  discipline;
-		this.add(linkTo(StudentController.class).slash("disciplines").slash(discipline.getId()).withSelfRel());
 
+	@Override
+	protected void build() {
+		this.add(linkTo(StudentController.class).slash("disciplines").slash(this.entity.getId()).withSelfRel());
 	}
 
+	
 
 }
