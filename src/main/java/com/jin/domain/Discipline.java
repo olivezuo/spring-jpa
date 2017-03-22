@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,12 +17,11 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class , property = "id")
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
@@ -48,11 +48,12 @@ public class Discipline implements BusinessEntity<Long> {
     @Max(10)
     private int priority = 5;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(
       name="student_discipline",
       joinColumns=@JoinColumn(name="discipline_id", referencedColumnName="id", foreignKey = @ForeignKey(name = "FK_DISCIPLINE")),
       inverseJoinColumns=@JoinColumn(name="student_id", referencedColumnName="id"))
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private List<Student> students;
     
 	public Long getId() {
@@ -109,8 +110,5 @@ public class Discipline implements BusinessEntity<Long> {
 		builder.append("]");
 		return builder.toString();
 	}
-
-
-
 
 }

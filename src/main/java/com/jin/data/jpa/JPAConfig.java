@@ -21,15 +21,15 @@ public abstract class JPAConfig {
 	
 	@Autowired
 	DynamicDataSource dynamicDataSource;
-	
+
 	protected String[] entityPackages = new String[]{};
 	
 	public void setEntityPackages(String[] entityPackages ){
 		this.entityPackages = entityPackages;
 	}
-	
+
 	public abstract void init();
-		
+
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();

@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jin.domain.Student;
-import com.jin.resource.StudentOrginalResource;
 import com.jin.resource.StudentResource;
 import com.jin.service.StudentResourceService;
 
