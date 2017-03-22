@@ -6,6 +6,8 @@ import javax.transaction.Transactional.TxType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.jin.data.datasource.TargetDataSource;
@@ -32,6 +34,12 @@ public class StudentServiceImpl implements StudentService{
 		Student student = studentRepository.findOne(id);
 		logger.info("We found a student " + student.toString());
 		return student;	
+	}
+
+	@Override
+	public Page<Student> findAllStudent(Pageable pageable) {
+		
+		return studentRepository.findAll(pageable);
 	}
 
 }
