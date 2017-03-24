@@ -40,7 +40,7 @@ public class DisciplineServiceImpl implements DisciplineService {
 	@Override
 	public Page<Discipline> findAllDiscipline(Pageable pageable) {
 		
-		return disciplineRepository.findAll(pageable);
+		return disciplineRepository.findDisciplineForListing(pageable);
 	}
 
 }

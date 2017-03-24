@@ -24,13 +24,22 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import com.jin.data.jpa.domain.BusinessEntity;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_DEFAULT)
 @Entity
 @Table(name = "discipline")
 public class Discipline implements BusinessEntity<Long> {
 
 	private static final long serialVersionUID = 3565372490276261679L;
 
+	public Discipline() {
+		super();
+	}
+
+	public Discipline(Long id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
 
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
