@@ -5,17 +5,27 @@ com:
   jin:
     datasource:
       master:
-        platform: postgres
-        driverClassName: org.postgresql.Driver
-        url: jdbc:postgresql://localhost:7432/test
-        username: zuojin
-        password: 123456
+        dataSourceProperties:
+          user: zuojin
+          password: 123456
+          serverName: localhost
+          portNumber: 7432
+          databaseName: test          
+        dataSourceClassName: org.postgresql.ds.PGSimpleDataSource
+        connectionTimeout: 2000
+        poolName: masterPool
+        maximumPoolSize: 10
       slave:
-        platform: postgres
-        driverClassName: org.postgresql.Driver
-        url: jdbc:postgresql://localhost:8432/test
-        username: zuojin
-        password: 123456
+        dataSourceProperties:
+          user: zuojin
+          password: 123456
+          serverName: localhost
+          portNumber: 8432
+          databaseName: test
+        dataSourceClassName: org.postgresql.ds.PGSimpleDataSource
+        connectionTimeout: 2000
+        poolName: slavePool
+        maximumPoolSize: 20
 spring:
   application:
     name: spring-jpa

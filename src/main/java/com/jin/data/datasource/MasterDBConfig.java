@@ -5,19 +5,18 @@ import javax.sql.DataSource;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
+
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 @ConfigurationProperties(prefix = "com.jin.datasource.master")
-public class MasterDBConfig extends DBConfig {
+public class MasterDBConfig extends HikariConfig {
 
 	@Bean
 	public DataSource masterDataSource() {
-		final DriverManagerDataSource masterDataSource = new DriverManagerDataSource();
-		masterDataSource.setDriverClassName(driverClassName);
-		masterDataSource.setUrl(url);
-		masterDataSource.setUsername(username);
-		masterDataSource.setPassword(password);
+		final HikariDataSource masterDataSource = new HikariDataSource(this);
+		
 
 		return masterDataSource;
 	}
