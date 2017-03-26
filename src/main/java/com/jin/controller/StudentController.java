@@ -43,7 +43,7 @@ public class StudentController {
 	}
 	
 	@RequestMapping(method=RequestMethod.GET, value="/students", produces=MediaType.APPLICATION_JSON_VALUE)
-	public PagedResources<StudentResource<Student>> findAll(@PageableDefault(page=1,size=15) Pageable pageable) {
+	public PagedResources<StudentResource<Student>> findAll(@PageableDefault(page=0,size=15) Pageable pageable) {
 		if (pageable.getPageSize() >= 1000) {
 			pageable = new PageRequest(pageable.getPageNumber(), 25);
 		}

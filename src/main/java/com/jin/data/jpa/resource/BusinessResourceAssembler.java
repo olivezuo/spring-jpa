@@ -16,7 +16,6 @@ public class BusinessResourceAssembler<E extends BusinessEntity<?> ,R extends Bu
 		this.resourceClass =  resourceClass;
 	}
 
-
 	@Override
 	public R toResource(E entity) {
 		

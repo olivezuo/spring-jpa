@@ -1,7 +1,6 @@
 package com.jin.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
@@ -19,12 +18,14 @@ public class DisciplineResourceServiceImpl extends BusinessResourceService imple
 
 	@Autowired
 	DisciplineService disciplineService;
-	
-	@Bean
-	public BusinessResourceAssembler disciplineResourcesAssembler(){
-		return new BusinessResourceAssembler(DisciplineController.class, DisciplineResource.class);
+			
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public void init(){
+		this.businessResourceAssembler = new BusinessResourceAssembler(DisciplineController.class, DisciplineResource.class);
 	}
-		
+	
 	@Override
 	public DisciplineResource<Discipline> findDiscipline(Long id) {
 		Discipline discipline = disciplineService.findDiscipline(id);
@@ -45,7 +46,9 @@ public class DisciplineResourceServiceImpl extends BusinessResourceService imple
 		Page<Discipline> disciplines = disciplineService.findAllDiscipline(pageable);
 		
 		PagedResourcesAssembler<Discipline> assembler = new PagedResourcesAssembler<Discipline>(resolver, null); 
-		PagedResources<DisciplineResource<Discipline>> disciplineResources = assembler.toResource(disciplines, disciplineResourcesAssembler());
+		
+		@SuppressWarnings("unchecked")
+		PagedResources<DisciplineResource<Discipline>> disciplineResources = assembler.toResource(disciplines, businessResourceAssembler);
 		
 		return disciplineResources;
 	}

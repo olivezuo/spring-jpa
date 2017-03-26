@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -91,7 +92,7 @@ public class Student implements BusinessEntity<Long> {
 		return builder.toString();
 	}
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
       name="student_discipline",
       joinColumns=@JoinColumn(name="student_id", referencedColumnName="id", foreignKey = @ForeignKey(name = "FK_STUDENT")),

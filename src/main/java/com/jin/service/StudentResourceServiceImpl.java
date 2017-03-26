@@ -1,7 +1,6 @@
 package com.jin.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
@@ -20,11 +19,12 @@ public class StudentResourceServiceImpl extends BusinessResourceService implemen
 	@Autowired
 	StudentService studentService;
 	
-	@Bean
-	public BusinessResourceAssembler studentResourcesAssembler(){
-		return new BusinessResourceAssembler(StudentController.class, StudentResource.class);
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+	public void init(){
+		this.businessResourceAssembler = new BusinessResourceAssembler(StudentController.class, StudentResource.class);
 	}
-	
+
 	@Override
 	public StudentResource<Student> findStudent(Long id) {
 		Student student = studentService.findStudent(id);
@@ -45,7 +45,9 @@ public class StudentResourceServiceImpl extends BusinessResourceService implemen
 		Page<Student> students = studentService.findAllStudent(pageable);
 		
 		PagedResourcesAssembler<Student> assembler = new PagedResourcesAssembler<Student>(resolver, null); 
-		PagedResources<StudentResource<Student>> studentResources = assembler.toResource(students, studentResourcesAssembler());		
+		
+		@SuppressWarnings("unchecked")
+		PagedResources<StudentResource<Student>> studentResources = assembler.toResource(students, businessResourceAssembler);		
 		
 		return studentResources;
 	}
