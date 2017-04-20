@@ -16,7 +16,7 @@ We use the annotation at the method level to decide the read(slave) or write(mas
 
 
 ## Docker Support
-To create the Docker image, run the following maven Goals:
+To create the Docker image and container, run the following maven command and docker command:
 
 ```
 $ mvn clean install docker:removeImage docker:build -Denv=dev -Dmaven.test.skip=true 
