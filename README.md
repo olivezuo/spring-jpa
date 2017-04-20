@@ -15,3 +15,11 @@ We use the [HikariCP](https://github.com/brettwooldridge/HikariCP) connection po
 We use the annotation at the method level to decide the read(slave) or write(master) datasource. We use AOP to enabled he annotation.
 
 
+## Docker Support
+To create the Docker image, run the following maven Goals:
+
+```
+$ mvn clean install docker:removeImage docker:build -Denv=dev -Dmaven.test.skip=true 
+$ docker run --name spring-jpa --link mysql-master:mysql-master --link mysql-slave:mysql-slave -p 8080:8080 jin/spring-jpa
+
+```
