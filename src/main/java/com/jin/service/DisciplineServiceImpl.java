@@ -30,7 +30,7 @@ public class DisciplineServiceImpl implements DisciplineService {
 	}
 	
 	@Override
-	@TargetDataSource(value="master")
+	@TargetDataSource(value="slave")
 	public Discipline findDiscipline(Long id) {
 		Discipline discipline = disciplineRepository.findOne(id);
 		logger.info("We found a discipline " + discipline.toString());
@@ -38,6 +38,7 @@ public class DisciplineServiceImpl implements DisciplineService {
 	}
 
 	@Override
+	@TargetDataSource(value="slave")
 	public Page<Discipline> findAllDiscipline(Pageable pageable) {
 		
 		return disciplineRepository.findDisciplineForListing(pageable);

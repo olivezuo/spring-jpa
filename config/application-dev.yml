@@ -8,7 +8,7 @@ com:
         dataSourceProperties:
           user: root
           password: 123456
-          serverName: localhost
+          serverName: mysql-master
           portNumber: 3306
           databaseName: test          
         dataSourceClassName: com.mysql.jdbc.jdbc2.optional.MysqlDataSource
@@ -19,8 +19,8 @@ com:
         dataSourceProperties:
           user: root
           password: 123456
-          serverName: localhost
-          portNumber: 3307
+          serverName: mysql-slave
+          portNumber: 3306
           databaseName: test
         dataSourceClassName: com.mysql.jdbc.jdbc2.optional.MysqlDataSource
         connectionTimeout: 2000
@@ -30,7 +30,7 @@ spring:
   application:
     name: spring-jpa
   jpa:
-    database-platform: 
+    database-platform:
     show-sql: true
     hibernate:
       ddl-auto: update

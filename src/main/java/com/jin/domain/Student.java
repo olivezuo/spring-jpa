@@ -28,7 +28,7 @@ public class Student implements BusinessEntity<Long> {
 	private static final long serialVersionUID = -830254737999889208L;
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 

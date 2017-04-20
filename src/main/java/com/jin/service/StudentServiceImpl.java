@@ -29,7 +29,7 @@ public class StudentServiceImpl implements StudentService{
 	}
 	
 	@Override
-	@TargetDataSource(value="master")
+	@TargetDataSource(value="slave")
 	public Student findStudent(Long id) {
 		Student student = studentRepository.findOne(id);
 		logger.info("We found a student " + student.toString());
@@ -37,6 +37,7 @@ public class StudentServiceImpl implements StudentService{
 	}
 
 	@Override
+	@TargetDataSource(value="slave")
 	public Page<Student> findAllStudent(Pageable pageable) {
 		
 		return studentRepository.findAll(pageable);

@@ -6,7 +6,7 @@
 	<groupId>com.jin</groupId>
 	<artifactId>spring-jpa</artifactId>
 	<version>1.0.0</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 	<name>spring-jpa</name>
 	<description>Spring JPA With R/W Split and Cache</description>
@@ -14,7 +14,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.5.1.RELEASE</version>
+		<version>1.5.2.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -22,6 +22,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<docker.image.prefix>jin</docker.image.prefix>
 	</properties>
 
 	<profiles>
@@ -55,6 +56,26 @@
 			               </execution>
 			            </executions>
             		</plugin>
+		            <plugin>
+		                <groupId>org.springframework.boot</groupId>
+		                <artifactId>spring-boot-maven-plugin</artifactId>
+		            </plugin>
+ 					<plugin>
+					     <groupId>com.spotify</groupId>
+					     <artifactId>docker-maven-plugin</artifactId>
+					     <version>0.4.11</version>
+					     <configuration>
+					         <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+					         <dockerDirectory>src/main/docker</dockerDirectory>
+					         <resources>
+					             <resource>
+					                 <targetPath>/</targetPath>
+					                 <directory>${project.build.directory}</directory>
+					                 <include>${project.build.finalName}.jar</include>
+					             </resource>
+					         </resources>
+					     </configuration>
+					 </plugin>
 				</plugins>
 			</build>
 		</profile>
@@ -73,11 +94,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-hateoas</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<scope>runtime</scope>
-		</dependency>
+	    <dependency>
+	      <groupId>mysql</groupId>
+	      <artifactId>mysql-connector-java</artifactId>
+	    </dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
