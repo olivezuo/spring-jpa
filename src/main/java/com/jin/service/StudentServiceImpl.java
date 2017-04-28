@@ -6,6 +6,8 @@ import javax.transaction.Transactional.TxType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,7 @@ public class StudentServiceImpl implements StudentService{
 	@Override
 	@TargetDataSource(value="master")
 	@Transactional(value=TxType.REQUIRES_NEW)
+	@CachePut(cacheNames="student",key="#student.id")
 	public Student addStudent(Student student) {
 		logger.info("Add new students " + student.toString() );
 		return studentRepository.save(student);		
@@ -30,6 +33,7 @@ public class StudentServiceImpl implements StudentService{
 	
 	@Override
 	@TargetDataSource(value="slave")
+	@Cacheable(cacheNames="student",key="#id")
 	public Student findStudent(Long id) {
 		Student student = studentRepository.findOne(id);
 		logger.info("We found a student " + student.toString());

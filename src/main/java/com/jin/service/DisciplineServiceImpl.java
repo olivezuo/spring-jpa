@@ -6,6 +6,8 @@ import javax.transaction.Transactional.TxType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,7 @@ public class DisciplineServiceImpl implements DisciplineService {
 	@Override
 	@TargetDataSource(value="master")
 	@Transactional(value=TxType.REQUIRES_NEW)
+	@CachePut(cacheNames="discipline",key="#disciline.id")
 	public Discipline addDiscipline(Discipline discipline) {
 		logger.info("Add new disciplines " + discipline.toString() );
 		return disciplineRepository.save(discipline);		
@@ -31,6 +34,7 @@ public class DisciplineServiceImpl implements DisciplineService {
 	
 	@Override
 	@TargetDataSource(value="slave")
+	@Cacheable(cacheNames="discipline",key="#id")
 	public Discipline findDiscipline(Long id) {
 		Discipline discipline = disciplineRepository.findOne(id);
 		logger.info("We found a discipline " + discipline.toString());

@@ -14,12 +14,14 @@ We use the [HikariCP](https://github.com/brettwooldridge/HikariCP) connection po
 ## Annotation implementation using AOP
 We use the annotation at the method level to decide the read(slave) or write(master) datasource. We use AOP to enabled he annotation.
 
+## Cache Layer
+We use Redis as the cache layer.
 
 ## Docker Support
 To create the Docker image and container, run the following maven command and docker command:
 
 ```
 $ mvn clean install docker:removeImage docker:build -Denv=dev -Dmaven.test.skip=true 
-$ docker run --name spring-jpa --link mysql-master:mysql-master --link mysql-slave:mysql-slave -p 8080:8080 jin/spring-jpa
+$ docker run --name spring-jpa --link mysql-master:mysql-master --link mysql-slave:mysql-slave --link redis-master:redis-master -p 8080:8080 jin/spring-jpa
 
 ```
