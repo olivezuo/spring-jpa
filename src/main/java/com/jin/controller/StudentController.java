@@ -5,6 +5,7 @@ import java.net.URI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.jin.domain.Student;
 import com.jin.resource.StudentResource;
 import com.jin.service.StudentResourceService;
+import com.jin.service.StudentService;
 
 @RestController
 public class StudentController {
@@ -28,6 +30,9 @@ public class StudentController {
 	
 	@Autowired
 	StudentResourceService studentResourceService;
+	
+	@Autowired
+	StudentService studentService;
 	
 	@RequestMapping(method=RequestMethod.POST, value="/students")
 	public ResponseEntity<?> add(@Validated @RequestBody Student student) {
@@ -48,6 +53,15 @@ public class StudentController {
 			pageable = new PageRequest(pageable.getPageNumber(), 25);
 		}
 		return studentResourceService.findAllStudent(pageable);
+	}
+
+	
+	@RequestMapping(method=RequestMethod.GET, value="/allstudents", produces=MediaType.APPLICATION_JSON_VALUE)
+	public Page<Student> findAllNolink(@PageableDefault(page=0,size=15) Pageable pageable) {
+		if (pageable.getPageSize() >= 1000) {
+			pageable = new PageRequest(pageable.getPageNumber(), 25);
+		}
+		return studentService.findAllStudent(pageable);
 	}
 
 }

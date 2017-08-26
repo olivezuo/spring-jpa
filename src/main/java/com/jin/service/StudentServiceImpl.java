@@ -44,7 +44,7 @@ public class StudentServiceImpl implements StudentService{
 	@TargetDataSource(value="slave")
 	public Page<Student> findAllStudent(Pageable pageable) {
 		
-		return studentRepository.findAll(pageable);
+		return studentRepository.findAllByOrderByIdDesc(pageable);
 	}
 
 }

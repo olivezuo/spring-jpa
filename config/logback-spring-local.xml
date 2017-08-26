@@ -15,13 +15,11 @@
 			<pattern>${FILE_LOG_PATTERN}</pattern>
 		</encoder>
 		<file>${LOG_FILE}</file>
-		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-			<fileNamePattern>${LOG_FILE}.%i</fileNamePattern>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}.gz</fileNamePattern>
+			<maxHistory>14</maxHistory>
+      		<totalSizeCap>15GB</totalSizeCap>
 		</rollingPolicy>
-		<triggeringPolicy
-			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-			<MaxFileSize>20MB</MaxFileSize>
-		</triggeringPolicy>
 	</appender>
 	
     <root level="INFO">
