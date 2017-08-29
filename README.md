@@ -22,6 +22,6 @@ To create the Docker image and container, run the following maven command and do
 
 ```
 $ mvn clean install docker:removeImage docker:build -Denv=dev -Dmaven.test.skip=true 
-$ docker run --name spring-jpa --link mysql-master:mysql-master --link mysql-slave:mysql-slave --link redis-master:redis-master -p 8080:8080 jin/spring-jpa
+$ docker run -d --name spring-jpa --link mysql-master:mysql-master --link mysql-slave:mysql-slave --link redis-master:redis-master -p 8080:8080 jin/spring-jpa
 
 ```
